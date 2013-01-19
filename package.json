@@ -1,0 +1,36 @@
+{
+  "name": "flirty_host",
+  "description": "For when you need to be safe... but not _too_ safe!",
+  "version": "0.1.0",
+  "homepage": "https://github.com/darwalenator/flirty_host",
+  "author": {
+    "name": "Darren Wallace",
+    "email": "wallace@midweekcrisis.com",
+    "url": "www.midweekcrisis.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/darwalenator/flirty_host.git"
+  },
+  "bugs": {
+    "url": "https://github.com/darwalenator/flirty_host/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/darwalenator/flirty_host/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/flirty_host",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.17",
+    "coffee-script": "~1.4.0"
+  },
+  "keywords": []
+}
