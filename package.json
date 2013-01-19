@@ -26,11 +26,24 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "mocha test",
+    "teamcity": "mocha -R teamcity test",
+    "build": "grunt",
+    "start": "mocha -w test"
   },
   "devDependencies": {
     "grunt": "~0.3.17",
-    "coffee-script": "~1.4.0"
+    "coffee-script": "~1.4.0",
+    "grunt-coffee": "0.0.6",
+    "grunt-simple-mocha": "~0.3.2",
+    "chai": "1.1.0",
+    "sinon": "1.4.2",
+    "sinon-chai": "2.1.2",
+    "grunt-coffeelint": "0.0.3",
+    "grunt-clean": "~0.3.0"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "express": "~3.0.6"
+  }
 }
