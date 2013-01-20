@@ -19,11 +19,5 @@ describe "Flirty.host()", ->
       request(@app).get('/index.txt')
         .expect "page 1", done 
 
-  describe "When passed a folder and a password", ->
-    beforeEach ->
-      @app = Flirty.host fixtures, "somepass"
 
-    it "should require a login", (done)->
-      request(@app).get('/index.txt')
-        .expect(401, done)
     
