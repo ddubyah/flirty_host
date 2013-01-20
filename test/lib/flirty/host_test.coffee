@@ -15,16 +15,20 @@ describe "Flirty.host()", ->
     beforeEach ->
       @app = Flirty.host fixtures
 
-    it "should serve the folder's contents", (done)->
-      request(@app).get('/index.txt')
+    it "should serve the folder's contents at '/content'", (done)->
+      request(@app).get('/content/index.txt')
         .expect "page 1", done 
 
-  describe "When passed a password", ->
+  describe "When initialised with a password", ->
     beforeEach ->
       @app = Flirty.host fixtures, "somepass"
 
     it "should host a login page", (done)->
-      request(@app).get('/sessions/login.html')
+      request(@app).get('/sessions/login')
         .expect /<title>Login<\/title>/, done
 
+    describe "before authentication", ->
+      it "should redirect to the login page", (done)->
+        request(@app).get('/content/index.txt')
+          .expect 302, done
     

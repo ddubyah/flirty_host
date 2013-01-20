@@ -11,16 +11,16 @@ module.exports = function(grunt) {
       files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
     },
     watch: {
-      files: ['<config:lint.files>', '<config:coffee.app.src>'],
-      tasks: 'coffee default'
+      files: ['<config:coffee.app.src>', 'src/**/*.jade'],
+      tasks: 'coffee cp'
     },
     coffee: {
       app: {
-        src: ['src/**/*.coffee'],
-        dest: './',
+        src: ['src/lib/**/*.coffee'],
+        dest: './lib',
         options: {
           preserve_dirs: true,
-          base_path: 'src'
+          base_path: 'src/lib'
         }
       }
     },
@@ -31,6 +31,12 @@ module.exports = function(grunt) {
     },
     clean:{
       folder: 'lib'
+    },
+    cp: {
+      dist: {
+        src: 'src/lib/flirty/views',
+        dest: 'lib/flirty/views'
+      }
     },
     jshint: {
       options: {
@@ -53,8 +59,9 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'coffeelint coffee');
+  grunt.registerTask('default', 'coffeelint coffee cp');
   grunt.loadNpmTasks('grunt-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-cp');
   grunt.loadNpmTasks('grunt-clean');
 };

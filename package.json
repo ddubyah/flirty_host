@@ -26,10 +26,10 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "mocha test",
+    "test": "mocha -w test",
     "teamcity": "mocha -R teamcity test",
     "build": "grunt",
-    "start": "mocha -w test"
+    "start": "grunt watch"
   },
   "devDependencies": {
     "grunt": "~0.3.17",
@@ -42,11 +42,15 @@
     "grunt-coffeelint": "0.0.3",
     "grunt-clean": "~0.3.0",
     "connect": "~2.7.2",
-    "supertest": "~0.5.1"
+    "supertest": "~0.5.1",
+    "grunt-cp": "~0.1.0"
   },
   "keywords": [],
   "dependencies": {
     "express": "~3.0.6",
-    "passport": "~0.1.15"
+    "passport": "~0.1.15",
+    "passport-local": "~0.1.6",
+    "jade": "~0.28.1",
+    "hashish": "0.0.4"
   }
 }
