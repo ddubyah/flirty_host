@@ -2,6 +2,6 @@
 express = require 'express'
 
 module.exports = (folder, password)->
-  console.log "Oi"
   app = express()
+  app.use express.static folder if folder?
   return app

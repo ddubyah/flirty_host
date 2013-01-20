@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     },
     coffeelint: {
       all: { 
-        src: ['src/**/*.coffee'],
+        src: ['src/**/*.coffee', 'test/**/*.coffee'],
       }
     },
     clean:{

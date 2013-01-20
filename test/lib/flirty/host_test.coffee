@@ -1,17 +1,29 @@
 express = require 'express'
 Flirty = require '../../../src/lib/flirty'
 http = require 'http'
+connect = require 'connect'
 
-describe "Flirty.Host", ->
-  beforeEach ->
-    @sut = Flirty.host()
+path = require 'path'
+fixtures = path.resolve(__dirname, '../../fixtures')
+
+describe "Flirty.host()", ->
 
   it "should exist", ->
-    expect(@sut).to.exist
+    expect(Flirty.host()).to.exist
 
-  it "should be able to start and stop as a server", (done)->
-    _server = http.createServer @sut
-    _server.listen 3434, (err)->
-      process.nextTick ->
-        _server.close (err)->
-          done()
+  describe "When passed a folder", ->
+    beforeEach ->
+      @app = Flirty.host fixtures
+
+    it "should serve the folder's contents", (done)->
+      request(@app).get('/index.txt')
+        .expect "page 1", done 
+
+  describe "When passed a folder and a password", ->
+    beforeEach ->
+      @app = Flirty.host fixtures, "somepass"
+
+    it "should require a login", (done)->
+      request(@app).get('/index.txt')
+        .expect(401, done)
+    
