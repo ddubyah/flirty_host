@@ -40,7 +40,9 @@
     "sinon": "1.4.2",
     "sinon-chai": "2.1.2",
     "grunt-coffeelint": "0.0.3",
-    "grunt-clean": "~0.3.0"
+    "grunt-clean": "~0.3.0",
+    "connect": "~2.7.2",
+    "supertest": "~0.5.1"
   },
   "keywords": [],
   "dependencies": {
