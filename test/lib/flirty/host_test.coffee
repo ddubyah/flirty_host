@@ -19,5 +19,12 @@ describe "Flirty.host()", ->
       request(@app).get('/index.txt')
         .expect "page 1", done 
 
+  describe "When passed a password", ->
+    beforeEach ->
+      @app = Flirty.host fixtures, "somepass"
+
+    it "should host a login page", (done)->
+      request(@app).get('/sessions/login.html')
+        .expect /<title>Login<\/title>/, done
 
     
