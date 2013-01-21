@@ -16,11 +16,11 @@ module.exports = function(grunt) {
     },
     coffee: {
       app: {
-        src: ['src/lib/**/*.coffee'],
+        src: ['src/**/*.coffee'],
         dest: './lib',
         options: {
           preserve_dirs: true,
-          base_path: 'src/lib'
+          base_path: 'src'
         }
       }
     },
@@ -31,12 +31,6 @@ module.exports = function(grunt) {
     },
     clean:{
       folder: 'lib'
-    },
-    cp: {
-      dist: {
-        src: 'src/lib/flirty/views',
-        dest: 'lib/flirty/views'
-      }
     },
     jshint: {
       options: {
@@ -59,7 +53,7 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'coffeelint coffee cp');
+  grunt.registerTask('default', 'coffeelint coffee');
   grunt.loadNpmTasks('grunt-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-cp');

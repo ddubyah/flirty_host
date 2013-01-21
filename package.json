@@ -43,7 +43,8 @@
     "grunt-clean": "~0.3.0",
     "connect": "~2.7.2",
     "supertest": "~0.5.1",
-    "grunt-cp": "~0.1.0"
+    "grunt-cp": "~0.1.0",
+    "chai-supertest": "0.0.6"
   },
   "keywords": [],
   "dependencies": {
