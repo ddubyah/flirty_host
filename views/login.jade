@@ -5,17 +5,17 @@ block content
   .hero-unit
     h1= heading
     p This content is protected. Please login below
-    form.form-horizontal
+    form.form-horizontal(action='/sessions', method='post')
       fieldset
         legend Login here
         .control-group
           label.control-label(for="inputUsername") Username
           .controls
-            input#inputUsername(type="text", placeholder="username")
+            input#inputUsername(type="text", placeholder="username", name="username")
         .control-group
           label.control-label(for="inputPassword") Password
           .controls
-            input(type="password", placeholder="password")
+            input#inputPassword(type="password", placeholder="password", name="password")
         .control-group
           .controls
             button.btn.btn-primary(type="submit")

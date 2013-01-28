@@ -1,12 +1,12 @@
 {
-  "name": "flirty_host",
+  "name": "flirty-host",
   "description": "For when you need to be safe... but not _too_ safe!",
   "version": "0.1.0",
   "homepage": "https://github.com/darwalenator/flirty_host",
   "author": {
     "name": "Darren Wallace",
     "email": "wallace@midweekcrisis.com",
-    "url": "www.midweekcrisis.com"
+    "url": "http://www.midweekcrisis.com"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
       "url": "https://github.com/darwalenator/flirty_host/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/flirty_host",
+  "main": "src/flirty",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -52,6 +52,7 @@
     "passport": "~0.1.15",
     "passport-local": "~0.1.6",
     "jade": "~0.28.1",
-    "hashish": "0.0.4"
+    "hashish": "0.0.4",
+    "connect-flash": "~0.1.0"
   }
 }

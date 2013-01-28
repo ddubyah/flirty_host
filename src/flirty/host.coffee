@@ -2,12 +2,13 @@
 express = require 'express'
 path = require 'path'
 passport = require 'passport'
-LocalStrategy = require 'passport-local'
+LocalStrategy = require('passport-local').Strategy
+flash = require 'connect-flash'
 hashish = require 'hashish'
 routes = require './routes'
 
 _defaults = {
-  mountPath: '/content'
+  mountPath: '/'
   sessionsPath: '/sessions'
   locals: {
     projectTitle: 'ProtectedPages'
@@ -17,24 +18,34 @@ _defaults = {
 
 _options = null
 
-module.exports = (folder, password, opts={})->
+module.exports = (folder, opts={})->
   _options = hashish.merge _defaults, opts
   app = express()
+  _configurePassport()
   _configure app
-  _protectContent app if password?
+  _protectContent app if _options.password?
   _hostStaticFolder app, folder if folder?
   return app
 
-_hostStaticFolder = (app, folder)->
-  console.log "Hosting static folder: %s", folder
-  app.use _options.mountPath, express.static(folder)
+_configurePassport = ->
+  passport.serializeUser (user, done)->
+    console.log "Serialize"
+    done null, user.id
 
-_protectContent = (app)->
-  console.log "Protecting content"
-  app.use _options.mountPath, _ensureAuthenticated
+  passport.deserializeUser (id, done)->
+    console.log "Deserialze"
+    if id == 101
+      done null, { id: 101 }
+    else
+      done null, { id: 101 }
+
+  passport.use new LocalStrategy (uname, pword, done)->
+    console.log "Local login\nusername: %s\npassword: %s", uname, pword
+    done null, { id: 101 }
+
 
 _configure = (app)->
-  flirtyPath = './flirty_root'
+  flirtyPath = path.resolve __dirname, '../../flirty_root'
   viewPath = path.resolve __dirname, '../../views'
   app.locals _options.locals
   app.set('views', viewPath);
@@ -42,17 +53,38 @@ _configure = (app)->
   app.use express.logger('dev')
   app.use express.cookieParser()
   app.use express.bodyParser()
-  app.use express.session secret: "flirty host"
   app.use express.methodOverride()
-  app.use app.router
-
+  app.use express.session secret: "flirtyHost"
+  app.use flash()
   app.use passport.initialize()
   app.use passport.session()
-
+  app.use app.router
   app.get "#{_options.sessionsPath}/login", routes.sessions.new
   app.use "#{_options.sessionsPath}", express.static flirtyPath
 
+_protectContent = (app)->
+  app.post _options.sessionsPath, passport.authenticate 'local', {
+    failureRedirect: "#{_options.sessionsPath}/login"
+    successRedirect: "/"
+    failureFlash: true
+  }
+
+  app.get "#{_options.sessionsPath}/logout", (req, res)->
+    console.log "Logging out"
+    req.logout()
+    res.redirect _options.mountPath
+    
+  app.use _options.mountPath, _ensureAuthenticated
+
 _ensureAuthenticated = (req, res, next)->
-  console.log "Protected? %s", req.isAuthenticated()
-  return next() if req.isAuthenticated()
-  res.redirect "#{_options.sessionsPath}/login"
+  console.log "Authorised? %s", req.isAuthenticated()
+  if req.isAuthenticated()
+    console.log "You may pass"
+    return next() 
+  else
+    console.log "Protected!"
+    res.redirect "#{_options.sessionsPath}/login"
+
+_hostStaticFolder = (app, folder)->
+  console.log "Hosting static folder: %s", folder
+  app.use _options.mountPath, express.static(folder)

@@ -8,11 +8,11 @@ module.exports = function(grunt) {
       files: ['test/**/*.js']
     },
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['lib/**/*.js', 'test/**/*.coffee']
     },
     watch: {
       files: ['<config:coffee.app.src>', 'src/**/*.jade'],
-      tasks: 'coffee cp'
+      tasks: 'coffee'
     },
     coffee: {
       app: {
@@ -56,6 +56,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'coffeelint coffee');
   grunt.loadNpmTasks('grunt-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
-  grunt.loadNpmTasks('grunt-cp');
   grunt.loadNpmTasks('grunt-clean');
 };
