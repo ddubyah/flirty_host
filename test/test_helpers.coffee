@@ -5,5 +5,7 @@ global.should = chai.should()
 global.sinon = require('sinon')
 global.sinonChai = chai.use(require('sinon-chai'))
 global.expect = chai.expect
-global.request = require('supertest')
+chaiSupertest = require('chai-supertest')
+global.request = chaiSupertest.request
+chai.use(chaiSupertest.httpAsserts)
 

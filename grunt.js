@@ -8,16 +8,16 @@ module.exports = function(grunt) {
       files: ['test/**/*.js']
     },
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['lib/**/*.js', 'test/**/*.coffee']
     },
     watch: {
-      files: ['<config:lint.files>', '<config:coffee.app.src>'],
-      tasks: 'coffee default'
+      files: ['<config:coffee.app.src>', 'src/**/*.jade'],
+      tasks: 'coffee'
     },
     coffee: {
       app: {
         src: ['src/**/*.coffee'],
-        dest: './',
+        dest: './lib',
         options: {
           preserve_dirs: true,
           base_path: 'src'
