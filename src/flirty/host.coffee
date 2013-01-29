@@ -7,9 +7,16 @@ flash = require 'connect-flash'
 hashish = require 'hashish'
 routes = require './routes'
 
+thirtyMinutes = 1000*60*30
+
+console.log thirtyMinutes
+
 _defaults = {
   mountPath: '/'
   sessionsPath: '/sessions'
+  maxAge: thirtyMinutes # defaults to 30 minutes
+  username: null
+  password: null
   locals: {
     projectTitle: 'ProtectedPages'
     heading: 'Hold it!'
@@ -40,7 +47,9 @@ _configurePassport = ->
       done null, { id: 101 }
 
   passport.use new LocalStrategy (uname, pword, done)->
-    console.log "Local login\nusername: %s\npassword: %s", uname, pword
+    console.log "\nLocal login challenge\n  username: %s\n  password: %s", uname, pword
+    return done null, false, { message: "Bad username" } if uname != _options.username
+    return done null, false, { message: "Bad password" } if pword != _options.password
     done null, { id: 101 }
 
 
@@ -54,7 +63,7 @@ _configure = (app)->
   app.use express.cookieParser()
   app.use express.bodyParser()
   app.use express.methodOverride()
-  app.use express.session secret: "flirtyHost"
+  app.use express.session secret: "flirtyHost", cookie: maxAge: _options.maxAge
   app.use flash()
   app.use passport.initialize()
   app.use passport.session()
@@ -73,7 +82,7 @@ _protectContent = (app)->
     console.log "Logging out"
     req.logout()
     res.redirect _options.mountPath
-    
+
   app.use _options.mountPath, _ensureAuthenticated
 
 _ensureAuthenticated = (req, res, next)->

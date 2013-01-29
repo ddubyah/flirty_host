@@ -5,14 +5,18 @@ block content
   .hero-unit
     h1= heading
     p This content is protected. Please login below
+        
     form.form-horizontal(action='/sessions', method='post')
       fieldset
         legend Login here
-        .control-group
+        - if (message)
+          .control-group
+            p.control-label.label.label-warning= message
+        .control-group(class=usernameClass)
           label.control-label(for="inputUsername") Username
           .controls
             input#inputUsername(type="text", placeholder="username", name="username")
-        .control-group
+        .control-group(class=passwordClass)
           label.control-label(for="inputPassword") Password
           .controls
             input#inputPassword(type="password", placeholder="password", name="password")
