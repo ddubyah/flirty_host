@@ -8,6 +8,9 @@
     "email": "wallace@midweekcrisis.com",
     "url": "http://www.midweekcrisis.com"
   },
+  "bin": {
+    "flirt": "./bin/flirt.coffee"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/darwalenator/flirty_host.git"
@@ -53,6 +56,9 @@
     "passport-local": "~0.1.6",
     "jade": "~0.28.1",
     "hashish": "0.0.4",
-    "connect-flash": "~0.1.0"
+    "connect-flash": "~0.1.0",
+    "optimist": "~0.3.5",
+    "prompt": "~0.2.9",
+    "colors": "~0.6.0-1"
   }
 }
