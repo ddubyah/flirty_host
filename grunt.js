@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['<config:coffee.app.src>', 'src/**/*.jade'],
-      tasks: 'coffee'
+      tasks: 'coffee:app'
     },
     coffee: {
       app: {
@@ -23,11 +23,20 @@ module.exports = function(grunt) {
           preserve_dirs: true,
           base_path: 'src'
         }
+      },
+      bin: {
+        src: ['bin_src/**/*.coffee'],
+        dest: './bin_src',
       }
     },
     coffeelint: {
       all: { 
         src: ['src/**/*.coffee', 'test/**/*.coffee'],
+      }
+    },
+    exec: {
+      compile_bin: {
+        command: "( echo '#!/usr/bin/env node'; coffee -cp ./bin_src/flirt.coffee ) > ./bin/flirt.js"
       }
     },
     clean:{
@@ -55,7 +64,9 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', 'coffeelint coffee');
+
   grunt.loadNpmTasks('grunt-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-clean');
 };
