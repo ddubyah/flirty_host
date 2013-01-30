@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -7,11 +9,38 @@ module.exports = function(grunt) {
       files: ['test/**/*.js']
     },
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['lib/**/*.js', 'test/**/*.coffee']
     },
     watch: {
-      files: '<config:lint.files>',
-      tasks: 'default'
+      files: ['<config:coffee.app.src>', 'src/**/*.jade'],
+      tasks: 'coffee:app'
+    },
+    coffee: {
+      app: {
+        src: ['src/**/*.coffee'],
+        dest: './lib',
+        options: {
+          preserve_dirs: true,
+          base_path: 'src'
+        }
+      },
+      bin: {
+        src: ['bin_src/**/*.coffee'],
+        dest: './bin_src',
+      }
+    },
+    coffeelint: {
+      all: { 
+        src: ['src/**/*.coffee', 'test/**/*.coffee'],
+      }
+    },
+    exec: {
+      compile_bin: {
+        command: "( echo '#!/usr/bin/env node'; coffee -cp ./bin_src/flirt.coffee ) > ./bin/flirt.js"
+      }
+    },
+    clean:{
+      folder: 'lib'
     },
     jshint: {
       options: {
@@ -34,6 +63,10 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint test');
+  grunt.registerTask('default', 'coffeelint coffee');
 
+  grunt.loadNpmTasks('grunt-coffee');
+  grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-clean');
 };

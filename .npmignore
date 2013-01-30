@@ -1,1 +1,10 @@
-/node_modules/
+node_modules
+src
+.npmignore
+.editorconfig
+.jshintrc
+.gitattributes
+docs
+sublime
+test
+Gruntfile.js

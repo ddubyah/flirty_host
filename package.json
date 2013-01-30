@@ -1,12 +1,15 @@
 {
-  "name": "flirty_host",
+  "name": "flirty-host",
   "description": "For when you need to be safe... but not _too_ safe!",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/darwalenator/flirty_host",
   "author": {
     "name": "Darren Wallace",
     "email": "wallace@midweekcrisis.com",
-    "url": "www.midweekcrisis.com"
+    "url": "http://www.midweekcrisis.com"
+  },
+  "bin": {
+    "flirt": "./bin/flirt"
   },
   "repository": {
     "type": "git",
@@ -21,16 +24,42 @@
       "url": "https://github.com/darwalenator/flirty_host/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/flirty_host",
+  "main": "src/flirty",
   "engines": {
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "mocha -w test",
+    "teamcity": "mocha -R teamcity test",
+    "build": "grunt",
+    "start": "grunt watch"
   },
   "devDependencies": {
     "grunt": "~0.3.17",
-    "coffee-script": "~1.4.0"
+    "coffee-script": "~1.4.0",
+    "grunt-coffee": "0.0.6",
+    "grunt-simple-mocha": "~0.3.2",
+    "chai": "1.1.0",
+    "sinon": "1.4.2",
+    "sinon-chai": "2.1.2",
+    "grunt-coffeelint": "0.0.3",
+    "grunt-clean": "~0.3.0",
+    "connect": "~2.7.2",
+    "supertest": "~0.5.1",
+    "grunt-cp": "~0.1.0",
+    "chai-supertest": "0.0.6",
+    "grunt-exec": "~0.3.0"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "express": "~3.0.6",
+    "passport": "~0.1.15",
+    "passport-local": "~0.1.6",
+    "jade": "~0.28.1",
+    "hashish": "0.0.4",
+    "connect-flash": "~0.1.0",
+    "optimist": "~0.3.5",
+    "prompt": "~0.2.9",
+    "colors": "~0.6.0-1"
+  }
 }
