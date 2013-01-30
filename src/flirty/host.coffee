@@ -9,8 +9,6 @@ routes = require './routes'
 
 thirtyMinutes = 1000*60*30
 
-console.log thirtyMinutes
-
 _defaults = {
   mountPath: '/'
   sessionsPath: '/sessions'
