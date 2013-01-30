@@ -9,7 +9,7 @@
     "url": "http://www.midweekcrisis.com"
   },
   "bin": {
-    "flirt": "./bin/flirt.coffee"
+    "flirt": "./bin/flirt"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,8 @@
     "connect": "~2.7.2",
     "supertest": "~0.5.1",
     "grunt-cp": "~0.1.0",
-    "chai-supertest": "0.0.6"
+    "chai-supertest": "0.0.6",
+    "grunt-exec": "~0.3.0"
   },
   "keywords": [],
   "dependencies": {
