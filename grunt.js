@@ -42,6 +42,17 @@ module.exports = function(grunt) {
     clean:{
       folder: 'lib'
     },
+    mochaTest: {
+      normal: ['test/**/*.coffee']
+    },
+    mochaTestConfig: {
+      normal: {
+        options: {
+          reporter: 'nyan',
+          globals: ['should']
+        }
+      }
+    },
     jshint: {
       options: {
         curly: true,
@@ -63,10 +74,13 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'coffeelint coffee');
+  grunt.registerTask('default', 'coffeelint mochaTest coffee');
+  grunt.registerTask('build', 'coffeelint coffee');
+  grunt.registerTask('test', 'mochaTest');
 
   grunt.loadNpmTasks('grunt-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-clean');
 };
