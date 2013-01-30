@@ -24,7 +24,7 @@
       "url": "https://github.com/darwalenator/flirty_host/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "src/flirty",
+  "main": "lib/flirty",
   "engines": {
     "node": ">= 0.8.0"
   },
