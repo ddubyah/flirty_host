@@ -1,6 +1,6 @@
 # flirty-host
 
-For when you need to be safe... but not _too_ safe!
+## For when you need to be safe... but not _too_ safe!
 
 Sometimes you need to show someone some web pages. And you need to make sure only that the chosen person sees it. FlirtyHost will host a folder of static web content for you, and protect it with a simple username and password.
 
