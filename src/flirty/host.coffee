@@ -81,6 +81,9 @@ _protectContent = (app)->
     req.logout()
     res.redirect _options.mountPath
 
+  app.get "#{_options.sessionsPath}/abort", (req, res)->
+    throw new Error("Abort!")
+
   app.use _options.mountPath, _ensureAuthenticated
 
 _ensureAuthenticated = (req, res, next)->
