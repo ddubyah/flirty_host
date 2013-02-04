@@ -27,11 +27,16 @@ cliConfig =
         password:
           help: 'The password you want to protect the content with'
           abbr: 's'
+        label:
+          help: 'Combined with the port number to generate a process.'
+          abbr: 'l'
+          default: 'flirty'
         daemon:
           help: 'Run as daemonized, background process'
           abbr: 'd'
           flag: yes
       callback: (options)->
+        delete options['port'] unless String(options.port).match /^\d{4}$/
         commands.host options
 
     list:
@@ -49,3 +54,13 @@ cliConfig =
           required: yes
       callback: (options)->
         commands.stop options.uid
+
+    stopall:
+      help: 'Stop all Flirty Hosts'
+      options:
+        force:
+          help: 'skips confirmation'
+          abbr: 'f'
+          flag: yes
+      callback: (options)->
+        commands.stopAll options

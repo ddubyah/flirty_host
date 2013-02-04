@@ -4,6 +4,7 @@ fs = require 'fs'
 path = require 'path'
 hashish = require 'hashish'
 spawn = require('child_process').spawn
+FlirtyUtils = require '../flirty/utils'
 require 'colors'
 
 module.exports = (options)->
@@ -19,13 +20,18 @@ module.exports = (options)->
         completeOptions.password = if completeOptions.password?.length > 1 then completeOptions.password else null
         callback null, completeOptions
     ]
-    spawnHost: [
+    checkFlirtyPort: [
       'sanitizeOptions'
+      (callback, results)->
+        FlirtyUtils.testPortIsAvailable results.sanitizeOptions.port, callback   
+    ]
+    spawnHost: [
+      'checkFlirtyPort'
       (callback, results)->
         _spawnHost results.sanitizeOptions, callback
     ]
   }, (err, results)->
-    console.log "Complete"
+    throw err if err
 
 _promptForMissingOptions = (options, callback)->
   prompt.message = "Flirty Host"

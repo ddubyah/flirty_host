@@ -8,8 +8,8 @@ exports.listFlirts = (flirts)->
     console.log "[%d] %s : %s http://localhost:%s - %s", 
       flirt.foreverIndex
       flirt.details.uid.yellow
-      flirt.details.options[1].green
-      flirt.details.options[3].green
+      flirt.details.options[1].green # folder
+      flirt.details.options[3].green # port
       flirt.details.pid
 
 exports.findByFlirtyId = (flirtyUid, callback)->
@@ -27,6 +27,13 @@ exports.findByFlirtyId = (flirtyUid, callback)->
   }, (err, results)->
     callback err, results.findFlirtById
 
+exports.testPortIsAvailable = (portnumber, callback)->
+  # N.B. Only checks for ports used in forever processes at the moment
+  _getFlirts (err, flirts)->
+    for flirt in flirts
+      return callback new Error "Port #{portnumber} not available" if flirt.details.options[3] == String(portnumber)
+    callback null, true
+
 _getFlirts = (callback)->
   async.auto {
     getForeverProcesses:
@@ -36,6 +43,7 @@ _getFlirts = (callback)->
       'getForeverProcesses'
       (callback, results)->
         flirts = []
+        return callback null, [] unless results.getForeverProcesses?
         for process, index in results.getForeverProcesses
           if _isFlirtyHost process
             flirts = flirts.concat {
