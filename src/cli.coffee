@@ -33,3 +33,19 @@ cliConfig =
           flag: yes
       callback: (options)->
         commands.host options
+
+    list:
+      help: 'List all running flirty processes'
+      callback: (options)->
+        commands.list options
+
+    stop:
+      help: 'Stop a running Flirty Host'
+      options: 
+        uid:
+          help: 'The uid of the host you want to stop . e.g. flirty3333'
+          abbr: 'i'
+          position: 1
+          required: yes
+      callback: (options)->
+        commands.stop options.uid
