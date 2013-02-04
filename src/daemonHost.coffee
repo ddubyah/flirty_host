@@ -1,28 +1,25 @@
 FlirtyHost = require './flirty/host'
+path = require 'path'
 options = require('optimist')
   .alias('f', 'folder')
   .alias('p', 'port')
   .alias('u', 'username')
   .alias('s', 'password')
-  .alias('i', 'identifier')
-  .default('identifier', 'flirty')
+  .alias('l', 'label')
+  .default('label', 'flirty')
   .argv
-
-# module.exports = (dir, port, options)->
 
 _daemonize = ->
   foreverize = require('foreverize')({
     logDir: 'logs'
-    uid: options.identifier+options.port
+    uid: options.label+options.port
   })
   unless foreverize.isMaster
-    _launch options.f, options.p, options.u, options.s
+    _launch options.folder, options.port, options.username, options.password
 
 _launch = (dir, port, username, password)->
   app = FlirtyHost dir, { username: username, password: password }
   app.listen port, (err)->
-    console.log "Daemon %s host on http://localhost:%s", dir, port
+    console.log "Hosting %s on http://localhost:%s", dir, port
 
-# console.log options
-# _longRun()
 _daemonize()

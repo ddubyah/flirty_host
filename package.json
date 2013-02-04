@@ -64,6 +64,8 @@
     "prompt": "~0.2.9",
     "colors": "~0.6.0-1",
     "foreverize": "~0.1.0",
-    "forever": "~0.10.0"
+    "forever": "~0.10.0",
+    "argumentum": "~0.6.0",
+    "async": "~0.1.22"
   }
 }
