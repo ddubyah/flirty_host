@@ -7,7 +7,7 @@ fixtures = path.resolve(__dirname, '../../fixtures')
 
 
 
-describe.only "Flirty.host()", ->
+describe "Flirty.host()", ->
 
   it "should exist", ->
     expect(Flirty.host()).to.exist

@@ -9,7 +9,7 @@
     "url": "http://www.midweekcrisis.com"
   },
   "bin": {
-    "flirt": "./bin/flirtcoffee"
+    "flirt": "./bin/flirt"
   },
   "repository": {
     "type": "git",

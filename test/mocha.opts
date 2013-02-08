@@ -2,7 +2,7 @@
 --compilers coffee:coffee-script
 --require test/test_helpers.coffee
 --recursive
---reporter min
+--reporter spec
 --colors
 --timeout 5000
 --slow 5000
