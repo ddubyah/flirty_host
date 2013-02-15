@@ -39,7 +39,7 @@ describe "Host command", ->
       @spawnArgs[0].should.equal 'coffee'
 
     it "should pass the script path in the options array", ->
-      @spawnArgs[1][0].should.equal require.resolve '../../../src/daemonHost'
+      @spawnArgs[1][0].should.equal require.resolve '../../../src/daemon_host'
 
     it "should pass options to the child process", ->
       optionIndex = 1

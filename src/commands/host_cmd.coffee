@@ -41,7 +41,7 @@ _promptForMissingOptions = (options, callback)->
     callback err, results
 
 _spawnHost = (options, callback)->
-  daemonScriptPath = require.resolve('../daemonHost')
+  daemonScriptPath = require.resolve('../daemon_host')
   command = if path.extname(daemonScriptPath).match(/coffee$/) then 'coffee' else 'node'  
   daemonScriptCommands = _buildScriptCommands daemonScriptPath, options
 
