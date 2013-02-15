@@ -22,4 +22,6 @@ _launch = (dir, port, username, password)->
   app.listen port, (err)->
     console.log "Hosting %s on http://localhost:%s", dir, port
 
-_daemonize()
+_daemonize() if require.main == module
+
+exports.daemonize = _daemonize
