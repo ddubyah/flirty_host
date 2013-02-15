@@ -3,11 +3,11 @@ async = require 'async'
 fs = require 'fs'
 path = require 'path'
 hashish = require 'hashish'
-spawn = require('child_process').spawn
+child_process = require('child_process')
 FlirtyUtils = require '../flirty/utils'
 require 'colors'
 
-module.exports = (options)->
+module.exports = (options, callback)->
   async.auto {
     promptForOptions: 
       (callback)->
@@ -32,6 +32,7 @@ module.exports = (options)->
     ]
   }, (err, results)->
     throw err if err
+    callback err if callback?
 
 _promptForMissingOptions = (options, callback)->
   prompt.message = "Flirty Host"
@@ -57,8 +58,9 @@ _spawnHost = (options, callback)->
     spawnOptions.detached = true 
     spawnOptions.stdio = ['ignore', outLog, errLog]
 
-  child = spawn command, daemonScriptCommands, spawnOptions
+  child = child_process.spawn command, daemonScriptCommands, spawnOptions
   child.unref() if options.daemon
+  callback null
 
 
 _buildScriptCommands = (scriptPath, options)->
