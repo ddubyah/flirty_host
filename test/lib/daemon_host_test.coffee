@@ -25,15 +25,15 @@ describe "DaemonHost", ->
     @DaemonHost.daemonize('./test')
     @flirtySpy.should.have.been.called
 
-  describe "Passing options to FlirtyHost", ->
-    it "should pass the proper folder", ->
+  describe "FlirtyHost", ->
+    it "should be passed the proper options", ->
       @DaemonHost.daemonize()
       @flirtySpy.should.have.been.calledWithMatch './duff', {
         username: 'bert'
         password: 'earnie'
       }
 
-  describe "Starting the server", ->
+  describe "The server", ->
     it "should listen on the proper port", ->
       @DaemonHost.daemonize()
       @listenStub.should.have.been.calledWithMatch 3838
